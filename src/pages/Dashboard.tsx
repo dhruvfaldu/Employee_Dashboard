@@ -12,6 +12,7 @@ import EditEmployeeModal from "@/components/employee/EditEmployeeModal";
 import Pagination from "../components/common/Pagination";
 import ThemeToggle from "../components/common/ThemeToggle";
 import { Users, Filter, UserCheck, UserX } from "lucide-react";
+import logo from "../assets/logo.png";
 
 function Dashboard() {
 
@@ -75,7 +76,7 @@ function Dashboard() {
 
     const handleDeleteEmployee = useCallback((id: number) => {
         deleteEmployee(id);
-    },[deleteEmployee]);
+    }, [deleteEmployee]);
 
     const handleEditEmployee = useCallback((employee: Employee) => {
         setEditingEmployee(employee);
@@ -88,8 +89,11 @@ function Dashboard() {
 
     return (
         <div className="min-h-screen bg-background text-foreground p-5 space-y-5 transition-colors">
-            <div className="flex justify-between items-center gap-4">
-                <h1 className="w-1/2 text-3xl font-bold tracking-tight">Employee Dashboard</h1>
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div className="flex items-center gap-2">
+                    <img src={logo} alt="Employee Management System Logo" className="h-8 w-8" />
+                    <h1 className="text-2xl font-bold">Employee Management System</h1>
+                </div>
                 <SearchBar search={search} setSearch={setSearch} />
             </div>
 
@@ -165,12 +169,12 @@ function Dashboard() {
                 </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row-reverse  justify-between items-center">
+            <div className="flex flex-col gap-5 sm:flex-row-reverse  justify-between items-center">
                 <div className="flex items-center gap-3">
                     <ThemeToggle />
                     <AddEmployeeModal />
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-col lg:flex-row gap-4">
                     <SortSelect sortBy={sortBy} setSortBy={setSortBy} />
                     <Filters department={department} setDepartment={setDepartment} status={status} setStatus={setStatus} />
                 </div>

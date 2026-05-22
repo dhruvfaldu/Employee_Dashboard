@@ -18,7 +18,7 @@ type SearchBarProps = {
 function SearchBar({ searchTerm, onSearchChange, search, setSearch, }: SearchBarProps) {
     const value = searchTerm ?? search ?? "";
     return (
-        <div className="relative w-1/3 sm:w-1/3">
+        <div className="relative w-full sm:w-1/3">
             {/* Search Icon */}
             <Search
                 className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none" />

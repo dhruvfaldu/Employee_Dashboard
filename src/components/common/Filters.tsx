@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select";
+import { Building2 } from "lucide-react";
 
 type FiltersProps = {
     department: string;
@@ -33,6 +34,7 @@ function Filters({ department, setDepartment, status, setStatus, }: FiltersProps
                             value="all"
                             className="cursor-pointer rounded-lg"
                         >
+                            <Building2 className="mr-2 ml-1 inline h-4 w-4 text-muted-foreground" />
                             All Departments
                         </SelectItem>
 
