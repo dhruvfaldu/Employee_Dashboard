@@ -13,7 +13,7 @@ import Pagination from "../components/common/Pagination";
 import ThemeToggle from "../components/common/ThemeToggle";
 import { Users, Filter, UserCheck, UserX } from "lucide-react";
 import logo from "../assets/logo.png";
-
+// import Login from "../pages/Login";
 function Dashboard() {
 
     const [search, setSearch] = useState("");
@@ -89,6 +89,7 @@ function Dashboard() {
 
     return (
         <div className="min-h-screen bg-background text-foreground p-5 space-y-5 transition-colors">
+             {/* Add this line to render the Login component */}
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div className="flex items-center gap-2">
                     <img src={logo} alt="Employee Management System Logo" className="h-8 w-8" />

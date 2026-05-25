@@ -1,8 +1,32 @@
-import { DollarSign, Pencil, Trash2, } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Employee } from "@/types/employee";
 import React from "react";
-import { BadgeInfo, Building2, CircleDollarSign, Hash, User, UserX, UserCheck } from "lucide-react";
+
+import {
+    Pencil,
+    Trash2,
+    Building2,
+    CircleDollarSign,
+    UserCheck,
+    UserX,
+} from "lucide-react";
+
+import { Employee } from "@/types/employee";
+
+import { Button } from "@/components/ui/button";
+
+import {
+    Card,
+    CardContent,
+    CardHeader,
+} from "@/components/ui/card";
+
+import { Badge } from "@/components/ui/badge";
+
+import {
+    Avatar,
+    AvatarFallback,
+} from "@/components/ui/avatar";
+
+import { Separator } from "@/components/ui/separator";
 
 type EmployeeCardProps = {
     employee: Employee;
@@ -11,68 +35,111 @@ type EmployeeCardProps = {
     onClick: (employee: Employee) => void;
 };
 
-
-function EmployeeCard({ employee, onEdit, onDelete, onClick }: EmployeeCardProps) {
+function EmployeeCard({
+    employee,
+    onEdit,
+    onDelete,
+    onClick,
+}: EmployeeCardProps) {
     const isActive = employee.status === "Active";
 
-    const firstLetter = employee.name.charAt(0).toUpperCase();
+    const firstLetter = employee.name
+        .charAt(0)
+        .toUpperCase();
 
     return (
-        <>
-            <div onClick={() => onClick(employee)} className="cursor-pointer rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
-                {/* Header */}
-                <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                        <div className={`flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary ${isActive ? "ring-2 ring-green-500" : "ring-2 ring-red-500"}`}>
+        <Card
+            onClick={() => onClick(employee)}
+            className="cursor-pointer rounded-3xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+        >
+            <CardHeader className="flex flex-row items-start justify-between space-y-0">
+                {/* Left */}
+                <div className="flex items-center gap-3">
+                    <Avatar
+                        className={`h-8 w-8 ${isActive
+                            ? "ring-2 ring-green-500"
+                            : "ring-2 ring-red-500"
+                            }`}
+                    >
+                        <AvatarFallback className="bg-primary/10 text-primary font-semibold">
                             {firstLetter}
-                        </div>
+                        </AvatarFallback>
+                    </Avatar>
 
-                        <h2 className="text-sm font-semibold">
+                    <div>
+                        <h2 className="text-base font-semibold">
                             {employee.name}
                         </h2>
+
+                        <p className="text-sm text-muted-foreground">
+                            Employee
+                        </p>
+                    </div>
+                </div>
+
+                {/* Status */}
+                <Badge
+                    variant={isActive ? "default" : "destructive"}
+                    className="rounded-full px-3 py-1 text-xs"
+                >
+                    {isActive ? (
+                        <>
+                            <UserCheck className="mr-1 h-3 w-3" />
+                            Active
+                        </>
+                    ) : (
+                        <>
+                            <UserX className="mr-1 h-3 w-3" />
+                            Inactive
+                        </>
+                    )}
+                </Badge>
+            </CardHeader>
+
+            <Separator />
+
+            <CardContent className="space-y-4">
+                {/* Department */}
+                <div className="flex items-center gap-8">
+                    <div className="flex items-center gap-3 text-sm">
+                        <div className="rounded-full bg-muted p-2">
+                            <Building2 className="h-4 w-4 text-muted-foreground" />
+                        </div>
+
+                        <div>
+                            <p className="text-xs text-muted-foreground">
+                                Department
+                            </p>
+
+                            <p className="font-medium">
+                                {employee.department}
+                            </p>
+                        </div>
                     </div>
 
-                    <span className={`rounded-full px-3 py-1 text-xs font-medium ${isActive
-                        ? "bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-400"
-                        : "bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400"
-                        }`}
-                    >
-                        {employee.status === "Active" ? (<>
-                            <UserCheck className="mr-1 mb-1 inline h-3 w-3" />
-                            Active
-                        </>) : (
-                            <>
-                                <UserX className="mr-1 mb-1 inline h-3 w-3" />
-                                Inactive
-                            </>
-                        )}
-                    </span>
+                    {/* Salary */}
+                    <div className="flex items-center gap-3 text-sm">
+                        <div className="rounded-full bg-muted p-2">
+                            <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
+                        </div>
+
+                        <div>
+                            <p className="text-xs text-muted-foreground">
+                                Salary
+                            </p>
+
+                            <p className="font-medium">
+                                ₹ {employee.salary}
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Details */}
-                <div className="mt-4 space-y-2 text-sm">
-                    <p>
-                        <Building2 className="mr-2 inline h-4 w-4 text-muted-foreground" />
-                        <span className="font-medium">
-                            Department:
-                        </span>{" "}
-                        {employee.department}
-                    </p>
-
-                    <p>
-                        <CircleDollarSign className="mr-2 inline h-4 w-4 text-muted-foreground" />
-                        <span className="font-medium">
-                            Salary:
-                        </span>{" "}
-                        ₹ {employee.salary}
-                    </p>
-                </div>
-
-                {/* Actions */}
-                <div className="mt-5 flex gap-3">
+                {/* Buttons */}
+                <div className="flex gap-3 pt-3">
                     <Button
                         variant="outline"
-                        className="h-10 flex-1 rounded-xl cursor-pointer"
+                        className="flex-1 rounded-xl cursor-pointer"
                         onClick={(e) => {
                             e.stopPropagation();
                             onEdit(employee);
@@ -84,20 +151,18 @@ function EmployeeCard({ employee, onEdit, onDelete, onClick }: EmployeeCardProps
 
                     <Button
                         variant="destructive"
-                        className="h-10 flex-1 rounded-xl cursor-pointer"
+                        className="flex-1 rounded-xl cursor-pointer"
                         onClick={(e) => {
                             e.stopPropagation();
                             onDelete(employee.id);
                         }}
                     >
-                        <Trash2 className="mr-2 h-4 w-4 " />
+                        <Trash2 className="mr-2 h-4 w-4" />
                         Delete
                     </Button>
                 </div>
-            </div>
-
-            
-        </>
+            </CardContent>
+        </Card>
     );
 }
 
