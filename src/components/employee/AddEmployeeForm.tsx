@@ -42,7 +42,7 @@ function AddEmployeeForm({ employeeToEdit, onSuccess }: AddEmployeeFormProps) {
     const updateEmployee = useEmployeeStore((s) => s.updateEmployee);
 
     const [name, setName] = useState(employeeToEdit?.name || "");
-    const [department, setDepartment] = useState(employeeToEdit?.department || "");
+    const [department, setDepartment] = useState(employeeToEdit?.department || "IT");
     const [salary, setSalary] = useState(employeeToEdit ? String(employeeToEdit.salary) : "");
     const [status, setStatus] = useState<Status>(employeeToEdit?.status || "Active");
 
@@ -146,20 +146,27 @@ function AddEmployeeForm({ employeeToEdit, onSuccess }: AddEmployeeFormProps) {
             {/* Department */}
             <div className="space-y-2">
                 <Label htmlFor="department">Department</Label>
-                <Input
-                    id="department"
+                <Select
                     value={department}
-                    placeholder="Enter department"
-                    onChange={(e) =>
-                        handleChange(
-                            "department",
-                            e.target.value,
-                            setDepartment
-                        )
+                    onValueChange={(value) =>
+                        setDepartment(value)
                     }
-                    onBlur={() => handleBlur("department")}
-                    className={inputClass}
-                />
+                >
+                    <SelectTrigger className={inputClass}>
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent
+                        position="popper"
+                        side="right"
+                        sideOffset={4}
+                        className="rounded-xl border-border bg-popover"
+                    >
+                        <SelectItem value="IT">IT</SelectItem>
+                        <SelectItem value="HR">HR</SelectItem>
+                        <SelectItem value="Sales">Sales</SelectItem>
+                        <SelectItem value="Marketing">Marketing</SelectItem>
+                    </SelectContent>
+                </Select>
                 {touched.department && errors.department && (
                     <p className="text-sm text-destructive">
                         {errors.department}
