@@ -10,6 +10,15 @@ import PublicRoute from "./PublicRoute";
 const AppRoutes = () => {
     return (
         <Routes>
+            {/* Home Route */}
+            <Route
+                path="/"
+                element={
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
+                }
+            />
             {/* Login Route */}
             <Route
                 path="/login"

@@ -50,9 +50,9 @@ function EmployeeCard({
     return (
         <Card
             onClick={() => onClick(employee)}
-            className="cursor-pointer rounded-3xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            className="cursor-pointer rounded-3xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl p-4"
         >
-            <CardHeader className="flex flex-row items-start justify-between space-y-0">
+            <CardHeader className="flex flex-row items-start justify-between space-y-0 px-0">
                 {/* Left */}
                 <div className="flex items-center gap-3">
                     <Avatar
@@ -80,7 +80,7 @@ function EmployeeCard({
                 {/* Status */}
                 <Badge
                     variant={isActive ? "default" : "destructive"}
-                    className="rounded-full px-3 py-1 text-xs"
+                    className="rounded-full px-3 py-3 text-xs"
                 >
                     {isActive ? (
                         <>
@@ -96,9 +96,7 @@ function EmployeeCard({
                 </Badge>
             </CardHeader>
 
-            <Separator />
-
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 px-0">
                 {/* Department */}
                 <div className="flex items-center gap-8">
                     <div className="flex items-center gap-3 text-sm">
